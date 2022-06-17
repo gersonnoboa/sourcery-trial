@@ -1,0 +1,56 @@
+import UIKit
+
+{% for type in types.implementing.DebuggableV2 %}
+// MARK: {{ type.name }} Debuggable
+extension {{type.name}} {
+    var debugViews: [UIView]? {
+        {% if argument.debuggable %}
+        return [UILabel()]
+        {% else %}
+        return nil
+        {% endif %}
+    }
+
+    {% if argument.debuggable %}
+    //sourcery:inline:auto:{{ type.name }}.ChangeLabels
+    func changeLabel(_label: UILabel, to text: String) {
+        label.text = text
+    }
+    //sourcery:end
+    {% else %}
+    //sourcery:inline:auto:{{ type.name }}.ChangeLabels
+
+    //sourcery:end
+    {% endif %}
+
+    func container() {
+    {% if argument.debuggable %}
+    //sourcery:inline:auto:{{ type.name }}.Labels
+    var hola: UILabel = {
+        let label = UILabel()
+
+        return label
+    }()
+    //sourcery:end
+    {% else %}
+    //sourcery:inline:auto:{{ type.name }}.Labels
+
+    //sourcery:end
+    {% endif %}
+
+    {% if argument.debuggable %}
+    //sourcery:inline:auto:{{ type.name }}.Labels
+    var hola: UILabel = {
+        let label = UILabel()
+
+        return label
+    }()
+    //sourcery:end
+    {% else %}
+    //sourcery:inline:auto:{{ type.name }}.Labels
+
+    //sourcery:end
+    {% endif %}
+    }
+}
+{% endfor %}

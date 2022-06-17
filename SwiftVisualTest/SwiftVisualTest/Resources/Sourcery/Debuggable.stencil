@@ -1,0 +1,45 @@
+import UIKit
+
+{% for type in types.implementing.Debuggable %}
+// MARK: {{ type.name }} Debuggable
+extension {{type.name}} {
+    {% if argument.debuggable %}
+
+    func changeLabel(_label: UILabel?, to text: String) {
+
+    }
+
+    var remoteVideoLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Hola"
+
+        return label
+    }()
+
+    var remoteAudioLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Hola 2"
+
+        return label
+    }()
+
+    var localVideoLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Hola 3"
+
+        return label
+    }()
+
+    var localAudioLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Hola 4"
+
+        return label
+    }()
+
+    var debugViews: [UIView] { [remoteVideoLabel, remoteAudioLabel, localVideoLabel, localAudioLabel]}
+    {% else %}
+
+    {% endif %}
+}
+{% endfor %}
